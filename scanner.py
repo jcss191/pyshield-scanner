@@ -1,4 +1,4 @@
-> import asyncio
+import asyncio
 import logging
 import random
 from typing import List, Optional
