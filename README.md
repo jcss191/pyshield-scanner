@@ -1,33 +1,35 @@
 # 🛡️ PyShield Stealth Scanner
 
-Fala, time! 👋 Este projeto é uma implementação de um **Network Scanner Profissional** focado em reconhecimento furtivo (Stealth Recon). Desenvolvi essa ferramenta para demonstrar como unir a performance do Python assíncrono com o poder da manipulação de pacotes em baixo nível.
+Fala, time! 👋 
+
+Este projeto não é apenas um "scriptzinho" de rede. É uma ferramenta de **reconhecimento ofensivo** que eu desenvolvi em Python para ser rápida e silenciosa. O objetivo aqui foi unir a performance do **AsyncIO** com o poder do **Scapy** para manipular pacotes na mão.
 
 ---
 
-### 🚀 O que essa ferramenta faz?
-Basicamente, o PyShield mapeia portas abertas em um alvo sem "fazer barulho". Diferente de conexões comuns, ele usa a técnica **TCP SYN Scan (Half-Open)**. 
+### 🚀 Pra que serve essa ferramenta?
+Sabe quando você precisa descobrir quais portas estão abertas em um servidor, mas não quer fazer barulho? É aí que o PyShield entra. Ele faz o mapeamento de alvos usando a técnica de **Stealth SYN Scan**.
 
-**A lógica é a seguinte:**
-1. O scanner envia um sinal "Oi" (SYN).
-2. O alvo responde "Oi, tudo bem?" (SYN-ACK) se a porta estiver aberta.
-3. O scanner, em vez de continuar o papo, desliga na cara (RST).
-*Resultado:* Sabemos que a porta está aberta, mas o servidor alvo dificilmente registra que houve uma conexão real. 
-
-
-
----
-
-### ⚙️ Pré-requisitos
-Como estamos lidando com manipulação de pacotes na camada 3 (IP), você vai precisar de:
-* **Python 3.8+** instalado.
-* **Permissões de Administrador (Sudo/Admin):** Essencial para criar pacotes brutos.
-* **Scapy:** A biblioteca que faz o trabalho sujo na rede.
+**Como ele funciona "por baixo do capô":**
+Diferente de uma conexão normal, ele não completa o "aperto de mão" (Handshake) do TCP. 
+1. Ele manda um sinal de **SYN**.
+2. Se o alvo responde **SYN-ACK**, ele já sabe que a porta tá aberta.
+3. Antes que o alvo registre a conexão, o script manda um **RST** (Reset) e desliga na cara. 
+*Resultado:* Você descobre a brecha e o servidor alvo nem vê quem passou por lá. 🕵️‍♂️
 
 ---
 
-### 🛠️ Como Instalar e Rodar
+### ⚙️ Como instalar no Kali Linux
 
-1. **Clone o repositório:**
+Como a gente manipula pacotes na camada 3 (baixo nível), você vai precisar da biblioteca Scapy. No seu terminal do Kali, rode:
+
+1. **Instale as dependências:**
 ```bash
+sudo apt update && sudo apt install python3-scapy -y 
+
 git clone [https://github.com/jcss191/pyshield-scanner.git](https://github.com/jcss191/pyshield-scanner.git)
 cd pyshield-scanner
+
+🛠️ Como usar na prática
+1. Ajuste o alvo:
+Abra o arquivo scanner.py e mude o IP do alvo lá no final do código. 🛠️
+mousepad scanner.py
